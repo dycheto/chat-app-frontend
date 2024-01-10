@@ -30,6 +30,6 @@ export type AppContextType = {
     setState: Dispatch<SetStateAction<AppStateType>>;
 }
 
-export type AppProviderProps = {
+export type ContextProviderProps = {
     children: ReactNode; 
   };

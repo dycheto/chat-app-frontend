@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import * as authService from "../service/authService";
 
 function Register() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(`Register submitted ${username}, ${password}`);
+    const response = authService.register(username, password);
+
   };
 
   return (
@@ -35,7 +37,9 @@ function Register() {
         </div>
         <button type="submit">Register</button>
       </form>
-      <span>If you have an acoount <Link to={'/login'}>Login</Link></span>
+      <span>
+        If you have an acoount <Link to={"/login"}>Login</Link>
+      </span>
     </div>
   );
 }

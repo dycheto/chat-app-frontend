@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { AppStateType, AppContextType, AppProviderProps } from "../types";
+import { AppStateType, AppContextType, ContextProviderProps } from "../types";
 
 const initialState: AppStateType = {
     currentUser: null,
@@ -10,7 +10,7 @@ export const AppContext = createContext<AppContextType | null>(null);
 
 
 
-export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
+export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     const [state, setState] = useState<AppStateType>({
       currentUser: null,
       chatRooms: []

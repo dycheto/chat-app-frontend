@@ -1,14 +1,39 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as authService from "../service/authService";
+import { UserType } from "../types";
+import { AppContext } from "../context/AppContext";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+  const appContext = useContext(AppContext);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
 
-    console.log(`Login ${username}, ${password}`);
+    try{
+      const response = await authService.login(username, password);
+      
+      if(response.jwt && appContext){
+        appContext.setState((prevState) => ({
+          ...prevState,
+          currentUser: { id: response.id, username: response.username, jwt: response.jwt }
+        }));
+
+        localStorage.setItem('token', response.jwt);
+        navigate("/home")
+      }
+
+    }catch(error){
+
+    }
+
+    
   };
 
   return (
@@ -35,8 +60,9 @@ function Login() {
         </div>
         <button type="submit">Login</button>
       </form>
-      <span>If you dont have an account <Link to="/register">Register</Link></span>
-      
+      <span>
+        If you dont have an account <Link to="/register">Register</Link>
+      </span>
     </div>
   );
 }
