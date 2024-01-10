@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -44,3 +45,36 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+=======
+# Chat App Frontend
+This repository hosts the frontend for a real-time chat application, implemented using React and socket.io.
+
+## Features
+
+- Real-time messaging interface with WebSocket support
+- User authentication and registration
+- Responsive design
+- Integration with backend WebSocket endpoints for live chat experience
+
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+2. Navigate to the project directory:
+3. Install dependencies:
+4. Start the development server:
+
+## Usage
+
+- The application will be available at `http://localhost:3000`.
+- Connect to the backend server to send and receive messages.
+
+
+>>>>>>> 9775c4d7a82c3d2e6a0bccd3535454e17da88cd0
