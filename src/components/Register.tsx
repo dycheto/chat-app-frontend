@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(`Login ${username}, ${password}`);
+    console.log(`Register submitted ${username}, ${password}`);
   };
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
@@ -33,12 +33,11 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
-      <span>If you dont have an account <Link to="/register">Register</Link></span>
-      
+      <span>If you have an acoount <Link to={'/login'}>Login</Link></span>
     </div>
   );
 }
 
-export default Login;
+export default Register;
