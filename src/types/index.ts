@@ -1,6 +1,9 @@
+import { Dispatch, ReactNode, SetStateAction } from "react";
+
 export type UserType = {
-    id: string,
-    username: string
+    id: string;
+    username: string;
+    jwt: string;
 }
 
 export type MessageType = {
@@ -17,3 +20,16 @@ export type ChatRoomType = {
     messages: MessageType[];
 }
 
+export type AppStateType ={
+    currentUser: UserType | null;
+    chatRooms: ChatRoomType[];
+}
+
+export type AppContextType = {
+    state: AppStateType;
+    setState: Dispatch<SetStateAction<AppStateType>>;
+}
+
+export type AppProviderProps = {
+    children: ReactNode; 
+  };
