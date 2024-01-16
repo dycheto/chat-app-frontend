@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export type UserType = {
-    id: string;
+    id: number;
     username: string;
     jwt: string;
 }

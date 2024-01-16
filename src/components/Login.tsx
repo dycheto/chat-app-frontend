@@ -15,17 +15,20 @@ function Login() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     
-
     try{
+
       const response = await authService.login(username, password);
-      
+
       if(response.jwt && appContext){
         appContext.setState((prevState) => ({
           ...prevState,
-          currentUser: { id: response.id, username: response.username, jwt: response.jwt }
+          currentUser: { id: response.userId, username: response.username, jwt: response.jwt }
         }));
 
         localStorage.setItem('token', response.jwt);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('userId', response.userId);
+
         navigate("/home")
       }
 

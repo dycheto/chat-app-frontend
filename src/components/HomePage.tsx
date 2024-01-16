@@ -1,30 +1,41 @@
+import { useContext, useEffect } from "react";
 import { ChatRoomType, MessageType, UserType } from "../types";
 import ChatRoom from "./ChatRoom";
 import ChatWindow from "./ChatWindow";
 import Sidebar from "./SideBar";
+import * as userServices from "../service/userService";
+import { AppContext } from "../context/AppContext";
 
-// const users: UserType[] = [
-//     { id: '1', username: 'Alice' },
-//     { id: '2', username: 'Bob' }
-//   ];
-  
-//   const messages: MessageType[] = [
-//     { id: '1', senderId: '1', receiverId: '2', content: 'Hello Bob!' },
-//     { id: '2', senderId: '2', receiverId: '1', content: 'Hey Alice!' }
-//   ];
-  
-//   const chatRooms: ChatRoomType[] = [
-//     { id: '1', name: 'General Chat', users, messages }
-//   ];
+const HomePage: React.FC = () => {
+  const appContext = useContext(AppContext);
 
-  const HomePage: React.FC = () => {
-    return (
-      <div className="home-page" style={{ display: 'flex', height: '100vh' }}>
-       <Sidebar/>
-       <ChatWindow/> 
-      </div>
-    );
-  };
-  
+  const chatrooms = appContext?.state.chatRooms;
+  const username = localStorage.getItem("username");
 
-  export default HomePage;
+  useEffect(() => {
+    if (typeof username == "string" &&  appContext) {
+      const data = userServices.getUser(username);
+     
+      data.then((data) => {
+        const sortedChatRooms = data.chatRooms.sort((a: any, b: any) => a.id - b.id);
+
+        appContext.setState((prevState) => ({
+          ...prevState,
+          chatRooms: sortedChatRooms
+        }));
+      }).catch(error => {
+        console.error("Error fetching chat rooms:", error);
+      });
+    }
+  }, []);
+
+
+  return (
+    <div className="home-page" style={{ display: "flex", height: "100vh" }}>
+      <Sidebar />
+      <ChatWindow />
+    </div>
+  );
+};
+
+export default HomePage;
